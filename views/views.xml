@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <!-- explicit list view definition -->
+	<record model="ir.ui.view" id="libreria.categoria_tree">
+		<field name="name">libreria list</field>
+		<field name="model">libreria.clase</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="descripcion"/>
+				<field name="horas"/>
+				<field name="fecha"/>
+				<field name="lugar"/>
+			</tree>
+		</field>
+  </record>
+
+    <!-- actions opening views on models -->
+
+  <record model="ir.actions.act_window" id="libreria.action_window">
+    <field name="name">Listado clases</field>
+    <field name="res_model">libreria.clase</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+
+    <!-- server action to the one above -->
+
+  <record model="ir.actions.server" id="libreria.action_server">
+    <field name="name">libreria server</field>
+    <field name="model_id" ref="model_libreria_libreria"/>
+    <field name="state">code</field>
+    <field name="code">
+      action = {
+        "type": "ir.actions.act_window",
+        "view_mode": "tree,form",
+        "res_model": model._name,
+      }
+    </field>
+  </record>
+
+
+
+<!-- nueva hecha por mi-->
+   <record model="ir.ui.view" id="libreria.profesores_tree">
+		<field name="name">profesores list</field>
+		<field name="model">libreria.profesores</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="telefono"/>
+				<field name="asignaturas"/>
+				<field name="fecha"/>
+				<field name="lugar"/>
+			</tree>
+		</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="libreria.action_profesores">
+      <field name="name">Listado profesores</field>
+      <field name="res_model">libreria.profesores</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="libreria.action_server">
+      <field name="name">libreria server</field>
+      <field name="model_id" ref="model_libreria_libreria"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Clases DAM" id="libreria.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Clases" id="libreria.menu_1" parent="libreria.menu_root"/>
+    <menuitem name="Profesores" id="libreria.menu_2" parent="libreria.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Listado de clases" id="libreria.menu_1_list" parent="libreria.menu_1"
+              action="libreria.action_window"/>
+	  
+    <menuitem name="Listado de profesores" id="libreria.menu_2_list" parent="libreria.menu_2"
+              action="libreria.action_profesores"/>
+
+  </data>
+</odoo>
