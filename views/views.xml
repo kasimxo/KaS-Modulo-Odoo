@@ -10,7 +10,6 @@
 				<field name="name"/>
 				<field name="descripcion"/>
 				<field name="horas"/>
-				<field name="fecha"/>
 				<field name="lugar"/>
 			</tree>
 		</field>
