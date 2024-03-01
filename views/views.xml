@@ -2,8 +2,8 @@
 <odoo>
   <data>
       <!-- explicit list view definition -->
-	<record model="ir.ui.view" id="libreria.categoria_tree">
-		<field name="name">libreria list</field>
+	<record model="ir.ui.view" id="libreria.clase_tree">
+		<field name="name">libreria.list</field>
 		<field name="model">libreria.clase</field>
 		<field name="arch" type="xml">
 			<tree>
@@ -15,6 +15,30 @@
 			</tree>
 		</field>
   </record>
+
+    <record model="ir.ui.view" id="libreria.clase_form">
+      <field name="name">libreria.clase.form</field>
+      <field name="model">libreria.clase</field>
+      <field name="arch" type="xml">
+        <form>
+        <!-- modificar-->
+          <group colspan="2" col="2">
+            <field name="name"/>
+            <field name="descripcion"/>
+            <field name="horas"/>
+            <field name="lugar"/>
+            <field name="profesores_id">
+              <tree>
+                <field name="name"/>
+                <field name="telefono"/>
+                <field name="fecha_nac"/>
+              </tree>
+            </field>
+          </group>
+        </form>
+      </field>
+    </record>
+
 
     <!-- actions opening views on models -->
 
@@ -28,7 +52,7 @@
     <!-- server action to the one above -->
 
   <record model="ir.actions.server" id="libreria.action_server">
-    <field name="name">libreria server</field>
+    <field name="name">libreria.server</field>
     <field name="model_id" ref="model_libreria_libreria"/>
     <field name="state">code</field>
     <field name="code">
@@ -44,17 +68,33 @@
 
 <!-- nueva hecha por mi-->
    <record model="ir.ui.view" id="libreria.profesores_tree">
-		<field name="name">profesores list</field>
+		<field name="name">profesores.list</field>
 		<field name="model">libreria.profesores</field>
 		<field name="arch" type="xml">
 			<tree>
 				<field name="name"/>
 				<field name="telefono"/>
-				<field name="asignaturas"/>
-				<field name="fecha"/>
+				<field name="fecha_nac"/>
 				<field name="lugar"/>
 			</tree>
 		</field>
+    </record>
+
+    <record model="ir.ui.view" id="libreria.profesores_form">
+      <field name="name">libreria.profesores.form</field>
+      <field name="model">libreria.profesores</field>
+      <field name="arch" type="xml">
+        <form>
+        <!-- modificar-->
+          <group colspan="2" col="2">
+            <field name="name"/>
+            <field name="telefono"/>
+            <field name="fecha_nac"/>
+            <field name="lugar"/>
+            <field name="clase_id"/>
+          </group>
+        </form>
+      </field>
     </record>
 
     <record model="ir.actions.act_window" id="libreria.action_profesores">
@@ -64,7 +104,7 @@
     </record>
 
     <record model="ir.actions.server" id="libreria.action_server">
-      <field name="name">libreria server</field>
+      <field name="name">libreria.server</field>
       <field name="model_id" ref="model_libreria_libreria"/>
       <field name="state">code</field>
       <field name="code">
@@ -73,6 +113,19 @@
           "view_mode": "tree,form",
           "res_model": model._name,
         }
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="libreria.clases_search_view">
+      <field name="name">libreria.clase.search</field>
+      <field name="model">libreria.clase</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name" string="Nombre"/>
+          <field name="horas" string="Horas a la semana"/>
+          <field name="lugar" string="Lugar"/>
+          <filter name="Pequeñas" domain="[('horas','&lt;=',3)]"/>
+        </search>
       </field>
     </record>
 

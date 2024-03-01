@@ -23,9 +23,10 @@ class webinar_damabl(models.Model):
     _description = 'libreria.clase'
     name = fields.Char(string="Nombre", required = True, help="Nombre de la clase")
     descripcion = fields.Text(string="Descripción")
-    horas = fields.Integer(string="Horas")
+    horas = fields.Integer(string="Horas a la semana")
     fecha = fields.Date(string="Fecha")
     lugar = fields.Char(string="Lugar")
+    profesores_id = fields.One2many("libreria.profesores","clase_id",string="Profesores")
 
 
 class webinar_profesores(models.Model):
@@ -33,8 +34,8 @@ class webinar_profesores(models.Model):
     _description = 'libreria.profesores'
     name = fields.Char(string="Nombre", required = True, help="Nombre del profesor")
     telefono = fields.Text(string="Teléfono")
-    asignaturas = fields.Text(string="Asignaturas")
-    fecha = fields.Date(string="Fecha")
+    fecha_nac = fields.Date(string="Fecha de nacimiento")
     lugar = fields.Char(string="Lugar")
+    clase_id = fields.Many2one("libreria.clase",string="Clase",required=True,ondelete="cascade")
 
 
