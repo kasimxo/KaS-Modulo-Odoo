@@ -24,7 +24,6 @@ class webinar_damabl(models.Model):
     name = fields.Char(string="Nombre", required = True, help="Nombre de la clase")
     descripcion = fields.Text(string="Descripción")
     horas = fields.Integer(string="Horas a la semana")
-    fecha = fields.Date(string="Fecha")
     lugar = fields.Char(string="Lugar")
     profesores_id = fields.One2many("libreria.profesores","clase_id",string="Profesores")
 
